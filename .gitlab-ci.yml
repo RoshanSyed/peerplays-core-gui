@@ -2,19 +2,19 @@
 image: node:8.9.4
 
 # This command is run before actual stages start running
-before_script:
-  - '( apt-get update -y && apt-get install openssh-client -y )'
-  - npm install
+# before_script:
+#   - '( apt-get update -y && apt-get install openssh-client -y )'
+#   - npm install
 
 stages:
-  - test
+#  - test
   - deploy
 
 # Job 1:
-build:
-  stage: test
-  script:
-    - npm install
+#build:
+#  stage: test
+#  script:
+#    - npm install
 
 deployToAWS:
   only:
