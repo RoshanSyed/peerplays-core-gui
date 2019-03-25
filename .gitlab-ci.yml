@@ -3,7 +3,7 @@ image: node:8.9.4
 
 # This command is run before actual stages start running
 before_script:
-  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - '( apt-get update -y && apt-get install openssh-client -y )'
   - npm install
 
 stages:
