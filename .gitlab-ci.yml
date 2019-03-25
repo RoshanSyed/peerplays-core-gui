@@ -1,5 +1,5 @@
 # Node docker image on which this would be run
-image: node:8.9.0
+image: node:8.9.4
 
 # This command is run before actual stages start running
 before_script:
@@ -21,4 +21,4 @@ deployToAWS:
     - develop
   stage: deploy
   script:
-- bash deploy/deploy.sh
+    - bash deploy/deploy.sh
