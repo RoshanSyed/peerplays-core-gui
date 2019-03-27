@@ -1,4 +1,5 @@
 #!/bin/bash
+rm peerplays-core-gui || true
 git clone -b develop https://github.com/RoshanSyed/peerplays-core-gui.git
 cd peerplays-core-gui
 whoami
