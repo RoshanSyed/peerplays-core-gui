@@ -12,14 +12,15 @@ stages:
 
 # Job 1:
 #build:
-#  stage: test
-#  script:ß
+#  stage: build
+#  artifacts:
+  #  name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+  #  paths:
+  #    -./
+#  script:
 #    - npm install
 
 deployToQA:
-  only:
-    - develop
   stage: deploy
   script:
     - bash deploy/deploy.sh
-  when: manual
