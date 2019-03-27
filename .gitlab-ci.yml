@@ -7,18 +7,19 @@ image: node:8.9.4
 #   - npm install
 
 stages:
-#  - test
+  - test
   - deploy
 
 # Job 1:
 #build:
 #  stage: test
-#  script:
+#  script:ß
 #    - npm install
 
-deployToAWS:
+deployToQA:
   only:
     - develop
   stage: deploy
   script:
     - bash deploy/deploy.sh
+  when: manual
