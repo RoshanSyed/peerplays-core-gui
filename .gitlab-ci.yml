@@ -24,8 +24,8 @@ deployToQA:
   stage: deploy
   script:
     - echo "====== Deploy to production server ======"
-    - apk update && apk upgrade
-    - apk add git openssh bash
+    - apt-get update && apk upgrade
+    - apt-get git openssh bash
     # Add target server`s secret key
     - mkdir ~/.ssh
     - echo $PRIVATE_KEY > ~/.ssh/id_rsa
