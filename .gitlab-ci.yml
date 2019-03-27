@@ -14,7 +14,7 @@ stages:
 #build:
 #  stage: build
 #  artifacts:
-  #  name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+  #  name: "$CI_JOB_NAME-$CI_COMMIT_SHA"
   #  paths:
   #    -./
 #  script:
@@ -23,4 +23,17 @@ stages:
 deployToQA:
   stage: deploy
   script:
-    - bash deploy/deploy.sh
+    - echo "====== Deploy to production server ======"
+    - apk update && apk upgrade
+    - apk add git openssh bash
+    # Add target server`s secret key
+    - mkdir ~/.ssh
+    - echo $PRIVATE_KEY > ~/.ssh/id_rsa
+    - chmod 700 ~/.ssh && chmod 600 ~/.ssh/*
+    - echo "Test ssh connection"
+    - ssh -o StrictHostKeyChecking=no -T "ubuntu@QA_SERVER"
+    # Delploy
+    - git clone -b $CI_COMMIT_REF_NAME $CI_REPOSITORY_URL
+    - cd $CI_PROJECT_NAME 
+    - pm2 remove $CI_PROJECT_NAME || true
+    - pm2 start --name $CI_PROJECT_NAME npm -- start
