@@ -1,7 +1,7 @@
 #!/bin/bash
-pm2 stop peerplays-core-gui || true
-pm2 delete peerplays-core-gui || true
-git clone -b develop https://github.com/RoshanSyed/peerplays-core-gui.git
+git clone -b $CI_COMMIT_REF_NAME https://github.com/RoshanSyed/peerplays-core-gui.git
 cd peerplays-core-gui
+whoami
+pm2 delete peerplays-core-gui || true
 npm install
 pm2 start --name peerplays-core-gui npm -- start
