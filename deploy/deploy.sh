@@ -3,22 +3,16 @@
 # any future command that fails will exit the script
 set -e
 
-# let's write the public key of our aws instance
-# eval $(ssh-agent -s)
-# echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-
-# ** Alternative approach
 mkdir -p ~/.ssh
 echo -e "$PRIVATE_KEY" > ~/.ssh/id_rsa
 chmod 600 ~/.ssh/id_rsa
-# ** End of alternative approach
 
 # disable the host key checking.
-./deploy/disableHostKeyChecking.sh
+touch ~/.ssh/config
+echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config
 
 # we have already setup the DEPLOYER_SERVER in our gitlab settings which is a
-# comma seperated values of ip addresses.
-DEPLOY_SERVERS=$QA_SERVER
+DEPLOY_SERVERS=$QA_SERVERS
 
 # lets split this string and convert this into array
 # In UNIX, we can use this commond to do this
@@ -32,5 +26,5 @@ echo "ALL_SERVERS ${ALL_SERVERS}"
 for server in "${ALL_SERVERS[@]}"
 do
   echo "deploying to ${server}"
-  ssh ubuntu@${server} 'bash' < ./deploy/updateAndRestart.sh
+  ssh ubuntu@${server} 'bash -s ./deploy/updateAndRestart.sh "$CI_COMMIT_REF_NAME"'
 done
