@@ -32,5 +32,5 @@ echo "ALL_SERVERS ${ALL_SERVERS}"
 for server in "${ALL_SERVERS[@]}"
 do
   echo "deploying to ${server}"
-  ssh ubuntu@${server} 'bash' < ./deploy/updateAndRestart.sh $CI_COMMIT_REF_NAME
+  ssh ubuntu@${server} 'bash' < ./deploy/updateAndRestart.sh "$CI_COMMIT_REF_NAME"
 done
