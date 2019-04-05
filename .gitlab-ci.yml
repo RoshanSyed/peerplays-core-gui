@@ -21,6 +21,7 @@ build:
     - npm install
   tags:
     - shared
+    
 deployToQA:
   stage: deploy
   script:
