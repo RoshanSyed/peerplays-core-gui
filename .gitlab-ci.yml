@@ -19,7 +19,8 @@ build:
       - binaries/
   script:
     - npm install
-
+  tags:
+    - shared
 deployToQA:
   stage: deploy
   script:
