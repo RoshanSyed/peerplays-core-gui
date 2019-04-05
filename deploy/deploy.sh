@@ -11,20 +11,19 @@ chmod 600 ~/.ssh/id_rsa
 touch ~/.ssh/config
 echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config
 
-# we have already setup the DEPLOYER_SERVER in our gitlab settings which is a
+# gets a list of servers from gitlab
 DEPLOY_SERVERS=$QA_SERVERS
 
-# lets split this string and convert this into array
-# In UNIX, we can use this commond to do this
-# ${string//substring/replacement}
-# our substring is "," and we replace it with nothing.
+# split this string and convert this into array
 ALL_SERVERS=(${DEPLOY_SERVERS//,/ })
 echo "ALL_SERVERS ${ALL_SERVERS}"
 
-# lets iterate over this array and ssh into each EC2 instance
-# once inside the server, run updateAndRestart.sh
+# ssh into all servers and run updateAndRestart.sh
 for server in "${ALL_SERVERS[@]}"
 do
   echo "deploying to ${server}"
   ssh ubuntu@${server} ARG1=$CI_COMMIT_REF_NAME 'bash -s' < ./deploy/updateAndRestart.sh
 done
+
+# build electron executables
+ssh pbsa@$BUILD_SERVER ARG1=$CI_COMMIT_REF_NAME 'bash -s' < ./deploy/buildElectron.sh
