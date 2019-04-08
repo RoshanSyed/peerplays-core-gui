@@ -19,5 +19,3 @@ deployToQA:
   script:
     - bash deploy/deploy.sh
   when: manual
-  only: 
-    - TEST-1-gitlab
