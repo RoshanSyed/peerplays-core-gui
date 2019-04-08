@@ -1,27 +1,19 @@
 # Node docker image on which this would be run
 image: node:8.9.4
 
-# This command is run before actual stages start running
-# before_script:
-#   - '( apt-get update -y && apt-get install openssh-client -y )'
-#   - npm install
-
 stages:
   - build
   - deploy
 
-# Job 1:
+# Builds app
 build:
   stage: build
-  artifacts:
-    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
-    paths:
-      - binaries/
   script:
     - npm install
   tags:
     - docker
-    
+
+# Deploys app to QA 
 deployToQA:
   stage: deploy
   script:
