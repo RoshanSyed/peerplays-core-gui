@@ -49,7 +49,7 @@ The requirements assume that certain tools are already available on the system. 
 
 
 ### Build Tools for Linux and MacOS
-Node.js, NPM, and python may be obtained from your operating system's typical package manager such as "apt" for Ubuntu.
+Node.js, NPM, and Python may be obtained from your operating system's typical package manager such as "apt" for Ubuntu.
 
 
 ### Build Tools for Windows 10
