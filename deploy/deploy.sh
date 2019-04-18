@@ -22,7 +22,7 @@ echo "ALL_SERVERS ${ALL_SERVERS}"
 for server in "${ALL_SERVERS[@]}"
 do
   echo "deploying to ${server}"
-  ssh ubuntu@${server} BRANCH=$CI_COMMIT_REF_NAME 'bash -s' < ./deploy/updateAndRestart.sh
+  ssh ubuntu@${server} BRANCH=$CI_COMMIT_REF_NAME VERSION=$BLOCKCHAIN 'bash -s' < ./deploy/updateAndRestart.sh
 done
 
 # build electron executables
