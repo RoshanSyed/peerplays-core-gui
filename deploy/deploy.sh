@@ -26,4 +26,4 @@ do
 done
 
 # build electron executables
-ssh pbsa@$BUILD_SERVER BRANCH=$CI_COMMIT_REF_NAME 'bash -s' < ./deploy/buildElectron.sh
+ssh pbsa@$BUILD_SERVER BRANCH=$CI_COMMIT_REF_NAME VERSION=$BLOCKCHAIN 'bash -s' < ./deploy/buildElectron.sh
